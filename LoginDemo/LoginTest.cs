@@ -1,3 +1,4 @@
+using LoginDemo.Genericos;
 using LoginDemo.PageObject.Login;
 using NUnit.Framework;
 using OpenQA.Selenium;
@@ -11,6 +12,7 @@ namespace LoginDemo
     {
         public IWebDriver driver;
         string baseURL = "https://the-internet.herokuapp.com/login";
+        CargarJson logindata = new CargarJson();
 
         [SetUp]
         public void ConfigBrowser()
@@ -26,14 +28,20 @@ namespace LoginDemo
         public void EnterLoginTrue()
         {
             LoginPage login = new LoginPage(baseURL, driver);
-            login.enterCredentials("tomsmith", "SuperSecretPassword!");
+            string user = logindata.login_data().trueLogin.username;
+            string pass = logindata.login_data().trueLogin.password;
+
+            login.enterCredentials(user, pass);
             login.clickButtom();
         }
         [Test]
         public void InvalidLogin()
         {
             LoginPage login = new LoginPage(baseURL, driver);
-            login.enterCredentials("user", "pass");
+            string user = logindata.login_data().badlogin.username;
+            string pass = logindata.login_data().badlogin.password;
+
+            login.enterCredentials(user, pass);
             login.clickButtom();
 
         }

@@ -1,0 +1,10 @@
+{
+  "TrueLogin": {
+    "username": "tomsmith",
+    "password": "SuperSecretPassword!"
+  },
+  "BadLogin": {
+    "username": "user",
+    "password": "pass"
+  }
+}
