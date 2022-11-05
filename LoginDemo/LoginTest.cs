@@ -10,28 +10,34 @@ namespace LoginDemo
         IWebDriver driver = new ChromeDriver(@"C:\driver\chromedriver");
         string baseURL = "https://the-internet.herokuapp.com/login";
 
-        [Test]
-        public void EnterLoginTrue()
+        [SetUp]
+        public void configBrowser()
         {
             driver.Manage().Window.Maximize();
             driver.Navigate().GoToUrl(baseURL);
+        }
+
+        [Test]
+        public void EnterLoginTrue()
+        {
             LoginPage login = new LoginPage(baseURL, driver);
             login.enterCredentials();
             login.clickButtom();
-            driver.Close();
-            driver.Quit();
         }
         [Test]
         public void InvalidLogin()
         {
-            driver.Manage().Window.Maximize();
-            driver.Navigate().GoToUrl(baseURL);
             driver.FindElement(By.Id("username")).SendKeys("user");
             driver.FindElement(By.Id("password")).SendKeys("Pass");
             driver.FindElement(By.CssSelector("#login > button")).Click();
+
+        }
+
+        [TearDown]
+        public void closeBrowser()
+        {
             driver.Close();
             driver.Quit();
-
         }
     }
 }
