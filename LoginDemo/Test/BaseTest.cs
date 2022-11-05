@@ -21,6 +21,8 @@ namespace LoginDemo.Test
         {
             new DriverManager().SetUpDriver(new ChromeConfig());
             driver = new ChromeDriver();
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(60);
+            driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(60);
             driver.Manage().Window.Maximize();
             driver.Navigate().GoToUrl(baseURL);
 
