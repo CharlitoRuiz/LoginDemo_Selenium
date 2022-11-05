@@ -26,15 +26,15 @@ namespace LoginDemo
         public void EnterLoginTrue()
         {
             LoginPage login = new LoginPage(baseURL, driver);
-            login.enterCredentials();
+            login.enterCredentials("tomsmith", "SuperSecretPassword!");
             login.clickButtom();
         }
         [Test]
         public void InvalidLogin()
         {
-            driver.FindElement(By.Id("username")).SendKeys("user");
-            driver.FindElement(By.Id("password")).SendKeys("Pass");
-            driver.FindElement(By.CssSelector("#login > button")).Click();
+            LoginPage login = new LoginPage(baseURL, driver);
+            login.enterCredentials("user", "pass");
+            login.clickButtom();
 
         }
         [TearDown]

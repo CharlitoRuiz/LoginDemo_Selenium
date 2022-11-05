@@ -28,10 +28,10 @@ namespace LoginDemo.PageObject.Login
         public IWebElement set_btnLogin() { return _webDriver.FindElement(this.btnLogin); }
 
         // Metodos
-        public void enterCredentials()
+        public void enterCredentials(string user, string pass)
         {
-            set_txtUser().SendKeys("tomsmith");
-            set_txtPass().SendKeys("SuperSecretPassword!");
+            set_txtUser().SendKeys(user);
+            set_txtPass().SendKeys(pass);
         }
 
         public void clickButtom()
