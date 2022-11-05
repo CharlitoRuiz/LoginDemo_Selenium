@@ -1,5 +1,6 @@
 using LoginDemo.Genericos;
 using LoginDemo.PageObject.Login;
+using LoginDemo.Test;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
@@ -8,21 +9,10 @@ using WebDriverManager.DriverConfigs.Impl;
 
 namespace LoginDemo
 {
-    public class Tests
+    [TestFixture]
+    public class Tests : BaseTest
     {
-        public IWebDriver driver;
-        string baseURL = "https://the-internet.herokuapp.com/login";
         CargarJson logindata = new CargarJson();
-
-        [SetUp]
-        public void ConfigBrowser()
-        {
-            new DriverManager().SetUpDriver(new ChromeConfig());
-            driver = new ChromeDriver();
-            driver.Manage().Window.Maximize();
-            driver.Navigate().GoToUrl(baseURL);
-
-        }
 
         [Test]
         public void EnterLoginTrue()
@@ -44,12 +34,6 @@ namespace LoginDemo
             login.enterCredentials(user, pass);
             login.clickButtom();
 
-        }
-        [TearDown]
-        public void closeBrowser()
-        {
-            driver.Close();
-            driver.Quit();
         }
     }
 }

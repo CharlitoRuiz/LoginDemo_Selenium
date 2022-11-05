@@ -7,15 +7,10 @@ using System.Text;
 namespace LoginDemo.PageObject.Login
 {
     [TestFixture]
-    public class LoginPage
+    public class LoginPage : BasePage
     {
-        public IWebDriver _webDriver;
-        public string baseUrl;
-
-        public LoginPage(string url, IWebDriver driver){
-            this._webDriver = driver;
-            this.baseUrl = url;
-        }
+        // Constructor
+        public LoginPage(string url, IWebDriver driver) : base(url, driver) { }
 
         // Localizadores
         private By txtLogin = By.Id("username");
