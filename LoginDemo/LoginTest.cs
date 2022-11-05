@@ -24,12 +24,10 @@ namespace LoginDemo
             LoginPage login = new LoginPage(baseURL, driver);
             login.enterCredentials();
             login.clickButtom();
-            driver.FindElement(By.CssSelector("#login > button")).Click();
         }
         [Test]
         public void InvalidLogin()
         {
-            LoginPage login = new LoginPage(baseURL, driver);
             driver.FindElement(By.Id("username")).SendKeys("user");
             driver.FindElement(By.Id("password")).SendKeys("Pass");
             driver.FindElement(By.CssSelector("#login > button")).Click();
