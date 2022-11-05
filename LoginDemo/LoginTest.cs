@@ -23,6 +23,14 @@ namespace LoginDemo
             driver.FindElement(By.Id("password")).SendKeys("SuperSecretPassword!");
             driver.FindElement(By.CssSelector("#login > button")).Click();
         }
+        [Test]
+        public void InvalidLogin()
+        {
+            driver.FindElement(By.Id("username")).SendKeys("user");
+            driver.FindElement(By.Id("password")).SendKeys("Pass");
+            driver.FindElement(By.CssSelector("#login > button")).Click();
+
+        }
         [TearDown]
         public void closeBrowser()
         {
