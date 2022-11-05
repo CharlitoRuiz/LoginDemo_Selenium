@@ -16,11 +16,13 @@ namespace LoginDemo.PageObject.Login
         private By txtLogin = By.Id("username");
         private By txtPass = By.Id("password");
         private By btnLogin = By.CssSelector("#login > button");
+        private By msjAlert = By.Id("flash");
 
         // Set
         public IWebElement set_txtUser() { return _webDriver.FindElement(this.txtLogin); }
         public IWebElement set_txtPass() { return _webDriver.FindElement(this.txtPass); }
         public IWebElement set_btnLogin() { return _webDriver.FindElement(this.btnLogin); }
+        public IWebElement set_msjAlert() { return _webDriver.FindElement(this.msjAlert); }
 
         // Metodos
         public void enterCredentials(string user, string pass)

@@ -23,6 +23,7 @@ namespace LoginDemo
 
             login.enterCredentials(user, pass);
             login.clickButtom();
+            Assert.IsTrue(login.set_msjAlert().Displayed);
         }
         [Test]
         public void InvalidLogin()
@@ -33,6 +34,8 @@ namespace LoginDemo
 
             login.enterCredentials(user, pass);
             login.clickButtom();
+            Assert.IsTrue(login.set_msjAlert().Text.Contains("username"));
+            Assert.IsTrue(login.set_msjAlert().Text.StartsWith("Your"));
 
         }
     }
