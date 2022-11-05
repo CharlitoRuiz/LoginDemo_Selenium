@@ -8,34 +8,28 @@ namespace LoginDemo
     {
         IWebDriver driver = new ChromeDriver(@"C:\driver\chromedriver");
 
-        [SetUp]
-        public void ConfigBrowser()
-        {
-            driver.Manage().Window.Maximize();
-            driver.Navigate().GoToUrl("https://the-internet.herokuapp.com/login");
-
-        }
-
         [Test]
         public void EnterLoginTrue()
         {
+            driver.Manage().Window.Maximize();
+            driver.Navigate().GoToUrl("https://the-internet.herokuapp.com/login");
             driver.FindElement(By.Id("username")).SendKeys("tomsmith");
             driver.FindElement(By.Id("password")).SendKeys("SuperSecretPassword!");
             driver.FindElement(By.CssSelector("#login > button")).Click();
+            driver.Close();
+            driver.Quit();
         }
         [Test]
         public void InvalidLogin()
         {
+            driver.Manage().Window.Maximize();
+            driver.Navigate().GoToUrl("https://the-internet.herokuapp.com/login");
             driver.FindElement(By.Id("username")).SendKeys("user");
             driver.FindElement(By.Id("password")).SendKeys("Pass");
             driver.FindElement(By.CssSelector("#login > button")).Click();
-
-        }
-        [TearDown]
-        public void closeBrowser()
-        {
             driver.Close();
             driver.Quit();
+
         }
     }
 }
