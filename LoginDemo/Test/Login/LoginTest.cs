@@ -45,10 +45,12 @@ namespace LoginDemo
                 photo = screenshot.takeScreenshot(driver);
                 test.AddScreenCaptureFromBase64String(photo);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-
-                throw;
+                string error = Convert.ToString(e);
+                screenshot.takeScreenshot(driver);
+                test.Log(Status.Fail, error);
+                Assert.Fail(error);
             }
 
         }
@@ -77,10 +79,12 @@ namespace LoginDemo
                 photo = screenshot.takeScreenshot(driver);
                 test.AddScreenCaptureFromBase64String(photo);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-
-                throw;
+                string error = Convert.ToString(e);
+                screenshot.takeScreenshot(driver);
+                test.Log(Status.Fail, error);
+                Assert.Fail(error);
             }
 
         }
