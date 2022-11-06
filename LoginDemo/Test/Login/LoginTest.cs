@@ -26,13 +26,21 @@ namespace LoginDemo
 
             string user = logindata.login_data().trueLogin.username;
             string pass = logindata.login_data().trueLogin.password;
+            
+            try
+            {
+                login.enterCredentials(user, pass);
+                screenshot.takeScreenshot(driver, "enter_credencials");
+                wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(login.set_btnLogin()));
+                login.clickButtom();
+                Assert.IsTrue(login.set_msjAlert().Displayed);
+                screenshot.takeScreenshot(driver, "test_pass");
+            }
+            catch (Exception)
+            {
 
-            login.enterCredentials(user, pass);
-            screenshot.takeScreenshot(driver, "enter_credencials");
-            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(login.set_btnLogin()));
-            login.clickButtom();
-            Assert.IsTrue(login.set_msjAlert().Displayed);
-            screenshot.takeScreenshot(driver, "test_pass");
+                throw;
+            }
 
         }
         [Test]
@@ -45,13 +53,21 @@ namespace LoginDemo
             string user = logindata.login_data().badlogin.username;
             string pass = logindata.login_data().badlogin.password;
 
-            login.enterCredentials(user, pass);
+            try
+            {
+                login.enterCredentials(user, pass);
+                login.clickButtom();
+                wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.TextToBePresentInElement(login.set_msjAlert(), "username"));
+                Assert.IsTrue(login.set_msjAlert().Text.Contains("username"));
+                Assert.IsTrue(login.set_msjAlert().Text.StartsWith("Your"));
+                screenshot.takeScreenshot(driver, "test_failedLogin");
+            }
+            catch (Exception)
+            {
 
-            login.clickButtom();
-            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.TextToBePresentInElement(login.set_msjAlert(), "username"));
-            Assert.IsTrue(login.set_msjAlert().Text.Contains("username"));
-            Assert.IsTrue(login.set_msjAlert().Text.StartsWith("Your"));
-            screenshot.takeScreenshot(driver, "test_failedLogin");
+                throw;
+            }
+
         }
     }
 }
