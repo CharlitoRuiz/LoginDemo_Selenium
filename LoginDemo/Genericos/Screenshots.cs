@@ -7,10 +7,10 @@ namespace LoginDemo.Genericos
 {
     public class Screenshots
     {
-        public void takeScreenshot(IWebDriver driver, string photoName)
+        public string takeScreenshot(IWebDriver driver)
         {
-            Screenshot photo = ((ITakesScreenshot)driver).GetScreenshot();
-            photo.SaveAsFile("C://driver//screens//" + photoName + ".png", ScreenshotImageFormat.Png);
+            string photo = ((ITakesScreenshot)driver).GetScreenshot().AsBase64EncodedString;
+            return photo;
         }
     }
 }
