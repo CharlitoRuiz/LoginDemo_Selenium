@@ -22,20 +22,25 @@ namespace LoginDemo
             // Instancias
             LoginPage login = new LoginPage(baseURL, driver);
             WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            Screenshots screenshot = new Screenshots();
 
             string user = logindata.login_data().trueLogin.username;
             string pass = logindata.login_data().trueLogin.password;
 
             login.enterCredentials(user, pass);
+            screenshot.takeScreenshot(driver, "enter_credencials");
             wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(login.set_btnLogin()));
             login.clickButtom();
             Assert.IsTrue(login.set_msjAlert().Displayed);
+            screenshot.takeScreenshot(driver, "test_pass");
+
         }
         [Test]
         public void InvalidLogin()
         {
             LoginPage login = new LoginPage(baseURL, driver);
             WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            Screenshots screenshot = new Screenshots();
 
             string user = logindata.login_data().badlogin.username;
             string pass = logindata.login_data().badlogin.password;
@@ -46,7 +51,7 @@ namespace LoginDemo
             wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.TextToBePresentInElement(login.set_msjAlert(), "username"));
             Assert.IsTrue(login.set_msjAlert().Text.Contains("username"));
             Assert.IsTrue(login.set_msjAlert().Text.StartsWith("Your"));
-
+            screenshot.takeScreenshot(driver, "test_failedLogin");
         }
     }
 }
