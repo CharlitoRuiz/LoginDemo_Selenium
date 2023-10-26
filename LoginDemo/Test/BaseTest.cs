@@ -3,8 +3,10 @@ using AventStack.ExtentReports.Reporter;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Edge;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using WebDriverManager;
 using WebDriverManager.DriverConfigs.Impl;
@@ -23,8 +25,8 @@ namespace LoginDemo.Test
         [SetUp]
         public void ConfigBrowser()
         {
-            new DriverManager().SetUpDriver(new ChromeConfig());
-            driver = new ChromeDriver();
+            //new DriverManager().SetUpDriver(new ChromeConfig());
+            driver = new EdgeDriver();
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(60);
             driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(60);
             driver.Manage().Window.Maximize();
@@ -35,11 +37,16 @@ namespace LoginDemo.Test
         [OneTimeSetUp]
         public void ReportStart()
         {
+            string currentDirectory = AppDomain.CurrentDomain.BaseDirectory;
+            string projectRootDirectory = Directory.GetParent(currentDirectory).Parent.Parent.Parent.FullName;
+
+            string reportFolder = Path.Combine(projectRootDirectory, "Reportes");
+            string reportPath = Path.Combine(reportFolder, "index.html");
+
             extent = new ExtentReports();
-            ExtentV3HtmlReporter htmlreporter = new ExtentV3HtmlReporter(@"..\..\..\Reports\" + this.GetType().ToString() + 
-                DateTime.Now.ToString("_MMddyyyy_hhmmtt") + ".html");
+            ExtentSparkReporter htmlreporter = new ExtentSparkReporter(reportPath);
             extent.AttachReporter(htmlreporter);
-            htmlreporter.Config.Theme = AventStack.ExtentReports.Reporter.Configuration.Theme.Dark;
+            htmlreporter.Config.Theme = AventStack.ExtentReports.Reporter.Config.Theme.Dark;
         }
 
         [OneTimeTearDown]
